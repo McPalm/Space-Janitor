@@ -6,20 +6,23 @@ public class Move : MonoBehaviour
 {
 
     public Transform Camera;
-    public Rigidbody Rigidbody;
+    public CharacterController CharacterController;
+    public float speed = 5f;
+    public float acceleration;
+    Vector3 lastmove;
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         var direction = GetInputTranslationDirection();
-        if(direction.z != 0f)
-        {
-            Rigidbody.AddForce(Camera.forward * direction.z);
-        }
-        if(direction.x != 0f)
-        {
-            Rigidbody.AddForce(Camera.right * direction.x);
-        }
+        Vector3 move = Camera.forward * direction.z + Camera.right * direction.x;
+        move.y = 0f;
+        lastmove = move * .2f + lastmove * .8f;
+        if(CharacterController.isGrounded)
+            lastmove.y -= 0f;
+        else
+            lastmove.y -= 9.98f * Time.fixedDeltaTime;
+        CharacterController.Move(lastmove * speed * Time.fixedDeltaTime);
     }
 
     Vector3 GetInputTranslationDirection()
