@@ -8,14 +8,19 @@ public class Interaction : MonoBehaviour
 {
     public Camera PlayerCamera;
     public GameObject GrabPoint;
+    public GameObject ThrowPoint;
     public float throwForce = 50f;
     public float reach = 1f;
 
     private int layerMask = 1 << 8;
-    private bool IsHoldingObject => PickedUpObject != null;
     public bool mouseOver { get; private set; }
 
+    public bool IsHoldingObject => PickedUpObject != null;
     [SerializeField] private Rigidbody PickedUpObject;
+
+
+    public float ChargeLevel => chargeInit > 0f ? Mathf.Clamp(Time.timeSinceLevelLoad - chargeInit, 0f, 1.5f) : 0f;
+    float chargeInit = 0f;
 
     public enum InteractionState
     {
@@ -29,7 +34,16 @@ public class Interaction : MonoBehaviour
     void Update()
     {
         mouseOver = Physics.Raycast(PlayerCamera.transform.position, PlayerCamera.transform.forward, out Hit, reach, layerMask);
-        if (Input.GetMouseButtonDown(0))
+        if(Input.GetMouseButtonUp(0) && chargeInit != 0f)
+        {
+            // actually throw
+            if(IsHoldingObject)
+            {
+                var power = 1f + ChargeLevel * 6f;
+                DropCurrentObject(power);
+            }
+        }
+        else if (Input.GetMouseButtonDown(0))
         {
             if (mouseOver)
             { // Raycast for objects on layer 8 AND Check if we are not grabbing an object.
@@ -39,7 +53,8 @@ public class Interaction : MonoBehaviour
                 }
                 else if (CurrentState == InteractionState.HoldingTrash)
                 {
-                    DropCurrentObject(5f);
+                    //DropCurrentObject(5f);
+                    chargeInit = Time.timeSinceLevelLoad;
                 }
 
                 Debug.Log("Clicked on Interactible Object");
@@ -54,10 +69,12 @@ public class Interaction : MonoBehaviour
                     case 0:
                         break;
                     case InteractionState.HoldingTrash:
-                        DropCurrentObject(5f);
+                        //DropCurrentObject(5f);
+                        chargeInit = Time.timeSinceLevelLoad;
                         break;
                     case InteractionState.HoldingTool:
-                        DropCurrentObject(5f);
+                        chargeInit = Time.timeSinceLevelLoad;
+                        //DropCurrentObject(5f);
                         break;
                 }
             }
@@ -69,7 +86,8 @@ public class Interaction : MonoBehaviour
         else if(IsHoldingObject)
         {
             var rb = PickedUpObject;
-            rb.velocity = (GrabPoint.transform.position - rb.transform.position) * (3f  + 2f/ rb.mass);
+            var point = chargeInit != 0f ? ThrowPoint.transform.position : GrabPoint.transform.position;
+            rb.velocity = (point - rb.transform.position) * (3f  + 2f/ rb.mass);
         }
         if (IsHoldingObject == false && CurrentState != InteractionState.Default)
             CurrentState = InteractionState.Default;
@@ -98,6 +116,7 @@ public class Interaction : MonoBehaviour
             }
         }
 
+        chargeInit = 0f;
         PickedUpObject.useGravity = false;
     }
 
@@ -110,7 +129,10 @@ public class Interaction : MonoBehaviour
             rigidbody.isKinematic = false;
             rigidbody.useGravity = true;
             if (force > 0f)
-                rigidbody.AddForce(PlayerCamera.transform.forward * force * throwForce + Vector3.up * throwForce * .5f);
+            {
+                rigidbody.velocity = Vector3.zero;
+                rigidbody.AddForce(PlayerCamera.transform.forward * force * throwForce + Vector3.up * throwForce * force * .5f);
+            }
         }
         PickedUpObject = null;
         CurrentState = InteractionState.Default;
