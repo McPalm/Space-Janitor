@@ -534,5 +534,6 @@ MonoBehaviour:
   PlayerCamera: {fileID: 6047654346572813757}
   GrabPoint: {fileID: 63722602}
   throwForce: 50
+  reach: 2
   PickedUpObject: {fileID: 0}
   CurrentState: 0

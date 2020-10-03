@@ -9,9 +9,10 @@ public class Interaction : MonoBehaviour
     public Camera PlayerCamera;
     public GameObject GrabPoint;
     public float throwForce = 50f;
+    public float reach = 1f;
 
     private int layerMask = 1 << 8;
-    private bool GrabbedObject = false;
+    private bool IsHoldingObject => PickedUpObject != null;
 
     [SerializeField] private GameObject PickedUpObject;
 
@@ -29,26 +30,16 @@ public class Interaction : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
 
-            if (Physics.Raycast(PlayerCamera.transform.position, PlayerCamera.transform.forward, out Hit, Mathf.Infinity, layerMask))
+            if (Physics.Raycast(PlayerCamera.transform.position, PlayerCamera.transform.forward, out Hit, reach, layerMask))
             { // Raycast for objects on layer 8 AND Check if we are not grabbing an object.
-                if (!GrabbedObject)
+                if (!IsHoldingObject)
                 {
                     Pickup(Hit.transform.gameObject);
                 }
-                else if (CurrentState == InteractionState.HoldingTool)
+                else if (CurrentState == InteractionState.HoldingTrash)
                 {
-                    if (Hit.transform.gameObject.GetComponent<InteractiveObject>().objectType == ObjectType.Trash)
-                    {
-                        // If we're holding the garbage bin, and click trash, destroy it.
-
-                        Destroy(Hit.transform.gameObject);
-                    }
+                    DropCurrentObject(5f);
                 }
-                else
-                {
-                    DropCurrentObject();
-                }
-
 
                 Debug.Log("Clicked on Interactible Object");
             }
@@ -74,6 +65,8 @@ public class Interaction : MonoBehaviour
         {
             DropCurrentObject(0f);
         }
+        if (IsHoldingObject == false && CurrentState != InteractionState.Default)
+            CurrentState = InteractionState.Default;
 
         Debug.DrawRay(PlayerCamera.transform.position, PlayerCamera.transform.forward * 1000, Color.yellow);
     }
@@ -104,8 +97,6 @@ public class Interaction : MonoBehaviour
         {
             rigidBody.isKinematic = true;
         }
-        // Pickup and grab a reference to that object.
-        GrabbedObject = true;
     }
 
     void DropCurrentObject(float force = 0)
@@ -119,7 +110,6 @@ public class Interaction : MonoBehaviour
                 rigidbody.AddForce(PlayerCamera.transform.forward * force * throwForce + Vector3.up * throwForce * .5f);
         }
         PickedUpObject = null;
-        GrabbedObject = false;
         CurrentState = InteractionState.Default;
     }
 
