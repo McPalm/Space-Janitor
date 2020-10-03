@@ -517,7 +517,10 @@ MonoBehaviour:
   Camera: {fileID: 6047654346572813730}
   CharacterController: {fileID: 6047654348017891732}
   speed: 5
+  crouchSpeed: 2
   acceleration: 0.15
+  crouch: 0
+  crouchDelta: 1.12
 --- !u!143 &6047654348017891732
 CharacterController:
   m_ObjectHideFlags: 0
@@ -553,4 +556,3 @@ MonoBehaviour:
   throwForce: 50
   reach: 2.5
   PickedUpObject: {fileID: 0}
-  CurrentState: 0
