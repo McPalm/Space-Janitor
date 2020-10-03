@@ -8,7 +8,7 @@ public class Move : MonoBehaviour
     public Transform Camera;
     public CharacterController CharacterController;
     public float speed = 5f;
-    public float acceleration;
+    public float acceleration = .2f;
     Vector3 lastmove;
 
 
@@ -26,12 +26,12 @@ public class Move : MonoBehaviour
         var direction = GetInputTranslationDirection();
         Vector3 move = Camera.forward * direction.z + Camera.right * direction.x;
         move.y = 0f;
-        lastmove = move * .2f + lastmove * .8f;
+        lastmove = move * acceleration + lastmove * (1f- acceleration);
         if(CharacterController.isGrounded)
-            lastmove.y -= 0f;
+            lastmove.y = 0f;
         else
-            lastmove.y -= 9.98f * Time.fixedDeltaTime;
-        CharacterController.Move(lastmove * speed * Time.fixedDeltaTime);
+            lastmove.y -= 9.98f * Time.deltaTime;
+        CharacterController.Move(lastmove * speed * Time.deltaTime);
 
     }
 

@@ -8,6 +8,7 @@ public class Interaction : MonoBehaviour
 {
     public Camera PlayerCamera;
     public GameObject GrabPoint;
+    public float throwForce = 50f;
 
     private int layerMask = 1 << 8;
     private bool GrabbedObject = false;
@@ -28,73 +29,98 @@ public class Interaction : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
 
-            if (Physics.Raycast(PlayerCamera.transform.position, PlayerCamera.transform.forward, out Hit, Mathf.Infinity, layerMask) )
+            if (Physics.Raycast(PlayerCamera.transform.position, PlayerCamera.transform.forward, out Hit, Mathf.Infinity, layerMask))
             { // Raycast for objects on layer 8 AND Check if we are not grabbing an object.
                 if (!GrabbedObject)
                 {
-                    PickedUpObject = Hit.transform.gameObject;
-                    PickedUpObject.transform.parent = GrabPoint.transform;
-                    PickedUpObject.transform.position = GrabPoint.transform.position;
-
-                    if (CurrentState == 0) // If our current interaction state is Default, check the new object for its object type.
-                    {
-                        switch (PickedUpObject.GetComponent<InteractiveObject>().objectType)
-                        {
-                            default:
-                                break;
-                            case ObjectType.Trash:
-                                CurrentState = InteractionState.HoldingTrash;
-                                break;
-                            case ObjectType.TrashCan:
-                                CurrentState = InteractionState.HoldingTool;
-                                break;
-                        }
-                    }
-                    // Pickup and grab a reference to that object.
-                    GrabbedObject = true;
+                    Pickup(Hit.transform.gameObject);
                 }
-                else if(CurrentState == InteractionState.HoldingTool)
+                else if (CurrentState == InteractionState.HoldingTool)
                 {
-                    if(Hit.transform.gameObject.GetComponent<InteractiveObject>().objectType == ObjectType.Trash)
+                    if (Hit.transform.gameObject.GetComponent<InteractiveObject>().objectType == ObjectType.Trash)
                     {
                         // If we're holding the garbage bin, and click trash, destroy it.
 
                         Destroy(Hit.transform.gameObject);
                     }
                 }
+                else
+                {
+                    DropCurrentObject();
+                }
 
 
                 Debug.Log("Clicked on Interactible Object");
             }
-            else if(PickedUpObject != null)
+            else if (PickedUpObject != null)
             { // Release the object and clear the reference to it.
 
-                switch(CurrentState)
+                switch (CurrentState)
                 {
                     default:
                         break;
                     case 0:
                         break;
                     case InteractionState.HoldingTrash:
-                        DropCurrentObject();
+                        DropCurrentObject(5f);
                         break;
                     case InteractionState.HoldingTool:
-                        DropCurrentObject();
+                        DropCurrentObject(5f);
                         break;
                 }
             }
         }
-
-        void DropCurrentObject()
+        else if (Input.GetMouseButtonDown(1) && PickedUpObject != null)
         {
-            PickedUpObject.transform.parent = null;
-            PickedUpObject = null;
-            GrabbedObject = false;
-            CurrentState = InteractionState.Default;
-
+            DropCurrentObject(0f);
         }
 
         Debug.DrawRay(PlayerCamera.transform.position, PlayerCamera.transform.forward * 1000, Color.yellow);
+    }
+
+    void Pickup(GameObject gameObject)
+    {
+        PickedUpObject = Hit.transform.gameObject;
+        PickedUpObject.transform.parent = GrabPoint.transform;
+        PickedUpObject.transform.position = GrabPoint.transform.position;
+
+        if (CurrentState == 0) // If our current interaction state is Default, check the new object for its object type.
+        {
+            switch (PickedUpObject.GetComponent<InteractiveObject>().objectType)
+            {
+                default:
+                    break;
+                case ObjectType.Trash:
+                    CurrentState = InteractionState.HoldingTrash;
+                    break;
+                case ObjectType.TrashCan:
+                    CurrentState = InteractionState.HoldingTool;
+                    break;
+            }
+        }
+
+        var rigidBody = gameObject.GetComponent<Rigidbody>();
+        if(rigidBody)
+        {
+            rigidBody.isKinematic = true;
+        }
+        // Pickup and grab a reference to that object.
+        GrabbedObject = true;
+    }
+
+    void DropCurrentObject(float force = 0)
+    {
+        PickedUpObject.transform.parent = null;
+        var rigidbody = PickedUpObject.GetComponent<Rigidbody>();
+        if (rigidbody)
+        {
+            rigidbody.isKinematic = false;
+            if (force > 0f)
+                rigidbody.AddForce(PlayerCamera.transform.forward * force * throwForce + Vector3.up * throwForce * .5f);
+        }
+        PickedUpObject = null;
+        GrabbedObject = false;
+        CurrentState = InteractionState.Default;
     }
 
 }
