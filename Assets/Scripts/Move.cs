@@ -11,8 +11,17 @@ public class Move : MonoBehaviour
     public float acceleration;
     Vector3 lastmove;
 
+
+
     // Update is called once per frame
-    void FixedUpdate()
+
+    private void Start()
+    {
+        Cursor.lockState = CursorLockMode.Confined; //lock dat cursor
+    }
+
+    void Update() //Noticed a stutter I think was due to using Fixed Update So I changed this to Update. 
+                  //Should be a fine like this since you're using Dt though.
     {
         var direction = GetInputTranslationDirection();
         Vector3 move = Camera.forward * direction.z + Camera.right * direction.x;
@@ -23,11 +32,14 @@ public class Move : MonoBehaviour
         else
             lastmove.y -= 9.98f * Time.fixedDeltaTime;
         CharacterController.Move(lastmove * speed * Time.fixedDeltaTime);
+
     }
 
     Vector3 GetInputTranslationDirection()
     {
         Vector3 direction = new Vector3();
+
+
         if (Input.GetKey(KeyCode.W))
         {
             direction += Vector3.forward;
@@ -44,6 +56,11 @@ public class Move : MonoBehaviour
         {
             direction += Vector3.right;
         }
+        //if(Input.GetKey(KeyCode.Escape))
+        //{
+        //    Application.Quit();
+        //}
+
         return direction;
     }
 }
