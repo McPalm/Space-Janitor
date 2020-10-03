@@ -33,7 +33,7 @@ public class Move : MonoBehaviour
     {
         var direction = GetInputTranslationDirection();
         Vector3 move = Camera.forward * direction.z + Camera.right * direction.x;
-        move.y = 0f;
+        move.y = lastmove.y;
         lastmove = move * acceleration + lastmove * (1f - acceleration);
         if (CharacterController.isGrounded)
             lastmove.y = 0f;
