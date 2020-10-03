@@ -15,7 +15,7 @@ public class Interaction : MonoBehaviour
     private bool IsHoldingObject => PickedUpObject != null;
     public bool mouseOver { get; private set; }
 
-    [SerializeField] private GameObject PickedUpObject;
+    [SerializeField] private Rigidbody PickedUpObject;
 
     public enum InteractionState
     {
@@ -66,6 +66,11 @@ public class Interaction : MonoBehaviour
         {
             DropCurrentObject(0f);
         }
+        else if(IsHoldingObject)
+        {
+            var rb = PickedUpObject;
+            rb.velocity = (GrabPoint.transform.position - rb.transform.position) * (3f  + 2f/ rb.mass);
+        }
         if (IsHoldingObject == false && CurrentState != InteractionState.Default)
             CurrentState = InteractionState.Default;
 
@@ -74,9 +79,9 @@ public class Interaction : MonoBehaviour
 
     void Pickup(GameObject gameObject)
     {
-        PickedUpObject = Hit.transform.gameObject;
-        PickedUpObject.transform.parent = GrabPoint.transform;
-        PickedUpObject.transform.position = GrabPoint.transform.position;
+        PickedUpObject = Hit.collider.GetComponent<Rigidbody>();
+        //PickedUpObject.transform.parent = GrabPoint.transform;
+        //PickedUpObject.transform.position = GrabPoint.transform.position;
 
         if (CurrentState == 0) // If our current interaction state is Default, check the new object for its object type.
         {
@@ -93,20 +98,17 @@ public class Interaction : MonoBehaviour
             }
         }
 
-        var rigidBody = gameObject.GetComponent<Rigidbody>();
-        if(rigidBody)
-        {
-            rigidBody.isKinematic = true;
-        }
+        PickedUpObject.useGravity = false;
     }
 
     void DropCurrentObject(float force = 0)
     {
-        PickedUpObject.transform.parent = null;
+        //PickedUpObject.transform.parent = null;
         var rigidbody = PickedUpObject.GetComponent<Rigidbody>();
         if (rigidbody)
         {
             rigidbody.isKinematic = false;
+            rigidbody.useGravity = true;
             if (force > 0f)
                 rigidbody.AddForce(PlayerCamera.transform.forward * force * throwForce + Vector3.up * throwForce * .5f);
         }
