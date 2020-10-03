@@ -13,6 +13,7 @@ public class Interaction : MonoBehaviour
 
     private int layerMask = 1 << 8;
     private bool IsHoldingObject => PickedUpObject != null;
+    public bool mouseOver { get; private set; }
 
     [SerializeField] private GameObject PickedUpObject;
 
@@ -22,15 +23,15 @@ public class Interaction : MonoBehaviour
         HoldingTrash,
         HoldingTool
     }
-    [SerializeField] private InteractionState CurrentState = InteractionState.Default;
+    public InteractionState CurrentState { get; private set; } = InteractionState.Default;
 
     RaycastHit Hit;
     void Update()
     {
+        mouseOver = Physics.Raycast(PlayerCamera.transform.position, PlayerCamera.transform.forward, out Hit, reach, layerMask);
         if (Input.GetMouseButtonDown(0))
         {
-
-            if (Physics.Raycast(PlayerCamera.transform.position, PlayerCamera.transform.forward, out Hit, reach, layerMask))
+            if (mouseOver)
             { // Raycast for objects on layer 8 AND Check if we are not grabbing an object.
                 if (!IsHoldingObject)
                 {

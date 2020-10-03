@@ -207,6 +207,7 @@ GameObject:
   - component: {fileID: 1357689968}
   - component: {fileID: 1357689970}
   - component: {fileID: 1357689969}
+  - component: {fileID: 7222574606068043938}
   m_Layer: 0
   m_Name: RawImage
   m_TagString: Untagged
@@ -268,6 +269,22 @@ MonoBehaviour:
     y: 0
     width: 1
     height: 1
+--- !u!114 &7222574606068043938
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1357689967}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0711abfe08aa2b945be311633d9ce160, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mouseMarker: {fileID: 1357689969}
+  interaction: {fileID: 231245547}
+  HighlightColour: {r: 0.92451507, g: 1, b: 0.6933962, a: 0.3529412}
+  NeutralColour: {r: 1, g: 1, b: 1, a: 0.15686275}
 --- !u!1 &6047654346572813759
 GameObject:
   m_ObjectHideFlags: 0
@@ -534,6 +551,6 @@ MonoBehaviour:
   PlayerCamera: {fileID: 6047654346572813757}
   GrabPoint: {fileID: 63722602}
   throwForce: 50
-  reach: 2
+  reach: 2.5
   PickedUpObject: {fileID: 0}
   CurrentState: 0
