@@ -10,6 +10,8 @@ public class TimeOfDay : MonoBehaviour
     public int startHour = 6;
     public int endHour = 17;
 
+    public float scale = 1f;
+
     public float dayDuration = 300f;
 
     public float currentTime { get; private set; }
@@ -29,7 +31,7 @@ public class TimeOfDay : MonoBehaviour
     void Update()
     {
         if(currentTime < dayDuration)
-            currentTime += Time.deltaTime;
+            currentTime += Time.deltaTime * scale;
         UpdateDisplay(currentTime);
     }
 

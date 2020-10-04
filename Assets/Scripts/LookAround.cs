@@ -5,7 +5,7 @@ using UnityEngine;
 public class LookAround : MonoBehaviour
 {
     public float yaw;
-    float pitch;
+    public float pitch;
 
     bool invertY = false;
 

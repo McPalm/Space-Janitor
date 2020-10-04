@@ -23,6 +23,13 @@ public class BreakdownPrint : MonoBehaviour
         yield return new WaitForSeconds(.5f);
     }
 
+    public IEnumerator ShowCurrentDay()
+    {
+        text.text = "Monday 06:00";
+        yield return new WaitForSeconds(5f);
+        text.text = "";
+    }
+
     void ShowBreakdown(int rent, int food, int transport, int loan, int salary, int penalty)
     {
         var gross = salary - penalty;
@@ -39,9 +46,9 @@ public class BreakdownPrint : MonoBehaviour
         + $"Penalty - {penalty}\n\n"
 
         + "Breakdown\n"
-        + $"Gross    ~{gross}\n"
-        + $"Tax      ~{tax}\n"
-        + $"Net      ~{gross - tax}";
+        + $"Gross    +{gross}\n"
+        + $"Tax      -{tax}\n"
+        + $"Net      {(gross > tax ? "+" : "")}{gross - tax}";
 
     }
 
@@ -51,21 +58,3 @@ public class BreakdownPrint : MonoBehaviour
 
     }
 }
-
-/**
-COST-
-   Rent       	- 200
-   Food       	- 125
-   Transport	- 21
-   Loan	- 50
-
-Earned
-   Day's pay	+ 500
-   Penalty 	- 50
-
-Breakdown
-   Gross    ~500
-   Tax ~10
-   Net ~10
-
-    */

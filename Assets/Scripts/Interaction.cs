@@ -49,7 +49,11 @@ public class Interaction : MonoBehaviour
             { // Raycast for objects on layer 8 AND Check if we are not grabbing an object.
                 if (!IsHoldingObject)
                 {
-                    Pickup(Hit.transform.gameObject);
+                    var interactive = Hit.transform.GetComponent<InteractiveObject>();
+                    if (interactive.objectType == ObjectType.Interact)
+                        interactive.Interact();
+                    else
+                        Pickup(Hit.transform.gameObject);
                 }
                 else if (CurrentState == InteractionState.HoldingTrash)
                 {
