@@ -690,18 +690,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 6047654346572813731, guid: 0a10ce3a32628ad4ab07d90c4e118db9, type: 3}
-      propertyPath: m_RendererIndex
-      value: -1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6047654346572813731, guid: 0a10ce3a32628ad4ab07d90c4e118db9, type: 3}
-      propertyPath: m_VolumeLayerMask.m_Bits
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6047654346572813731, guid: 0a10ce3a32628ad4ab07d90c4e118db9, type: 3}
-      propertyPath: m_RenderPostProcessing
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6047654348017891735, guid: 0a10ce3a32628ad4ab07d90c4e118db9, type: 3}
       propertyPath: m_Name
       value: Player
@@ -712,7 +700,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6047654348017891736, guid: 0a10ce3a32628ad4ab07d90c4e118db9, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.33
+      value: -0.4901886
       objectReference: {fileID: 0}
     - target: {fileID: 6047654348017891736, guid: 0a10ce3a32628ad4ab07d90c4e118db9, type: 3}
       propertyPath: m_LocalPosition.z
