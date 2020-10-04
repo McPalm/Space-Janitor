@@ -23,9 +23,9 @@ public class BreakdownPrint : MonoBehaviour
         yield return new WaitForSeconds(.5f);
     }
 
-    public IEnumerator ShowCurrentDay()
+    public IEnumerator ShowCurrentDay(string day)
     {
-        text.text = "Monday 06:00";
+        text.text = day;
         yield return new WaitForSeconds(5f);
         text.text = "";
     }

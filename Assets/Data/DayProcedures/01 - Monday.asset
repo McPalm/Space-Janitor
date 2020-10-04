@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: babecc2526a35024c90ca759756dd38b, type: 3}
+  m_Name: 01 - Monday
+  m_EditorClassIdentifier: 
+  dayName: Monday
+  PreworkAudio: []
+  WorkAudio:
+  - {fileID: 8300000, guid: 6c7daf6059e17934db7b88bcc39fcb03, type: 3}
+  HalfDayAudio: []
+  EndDayAudio: {fileID: 8300000, guid: d5b164970f3c4284790e034234dee55d, type: 3}
+  StartHour: 8
+  trashNumber: 10
