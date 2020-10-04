@@ -6,9 +6,6 @@ public class TrashBin : MonoBehaviour
 {
     public Rigidbody binRB;
 
-
-    public AudioClip[] noises;
-
     private void OnTriggerEnter(Collider other)
     {
         var ohs = other.GetComponent<InteractiveObject>();
@@ -21,10 +18,6 @@ public class TrashBin : MonoBehaviour
                 rb.velocity *= .1f;
                 
                 Destroy(ohs.gameObject, .2f);
-
-                var au = GetComponent<AudioSource>();
-                au.clip = noises[Random.Range(0, noises.Length)];
-                au.Play();
             }
         }
     }
