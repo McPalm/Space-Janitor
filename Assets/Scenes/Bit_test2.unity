@@ -543,7 +543,7 @@ MonoBehaviour:
   startHour: 6
   endHour: 17
   scale: 1
-  dayDuration: 30
+  dayDuration: 250
 --- !u!1 &382773547 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 0351e13b742dd664693792a820157ce5, type: 3}
@@ -1598,7 +1598,7 @@ GameObject:
   - component: {fileID: 1742980783}
   - component: {fileID: 1742980782}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: TrashGen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1617,7 +1617,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TrashPrefabs:
-  - {fileID: 6154162007998691050, guid: bbf9c2c2917a9e4499bb4e1ff92a9799, type: 3}
+  - {fileID: 8614557699748499380, guid: 1c17ccd836a7454429f81fd5fa5d0894, type: 3}
+  - {fileID: 2859958684352417013, guid: d6b293086ac3d3c408ba06575036ee65, type: 3}
+  - {fileID: 4311235777888637750, guid: 43e8eb06cd34ad24da1458ada41006e6, type: 3}
   SpawnZone: {fileID: 1742980783}
   trashNumber: 5
 --- !u!65 &1742980783
@@ -2525,15 +2527,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8347083979882556425, guid: d68ff99541fc3f7409e1fa405cdc8cd7, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -20.300756
+      value: -12.68
       objectReference: {fileID: 0}
     - target: {fileID: 8347083979882556425, guid: d68ff99541fc3f7409e1fa405cdc8cd7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.21
+      value: -0.86
       objectReference: {fileID: 0}
     - target: {fileID: 8347083979882556425, guid: d68ff99541fc3f7409e1fa405cdc8cd7, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -21.396933
+      value: -3.48
       objectReference: {fileID: 0}
     - target: {fileID: 8347083979882556425, guid: d68ff99541fc3f7409e1fa405cdc8cd7, type: 3}
       propertyPath: m_LocalRotation.x
