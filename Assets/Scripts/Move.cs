@@ -1,9 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Move : MonoBehaviour
 {
+
+    public UnityEvent OnStep;
 
     public Transform Camera;
     public CharacterController CharacterController;
@@ -25,6 +28,8 @@ public class Move : MonoBehaviour
     public float bobProgression = 0f;
     public float bobMagnitude = 0f;
 
+    float walkDuration = 0f;
+
     private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked; //lock dat cursor
@@ -38,6 +43,13 @@ public class Move : MonoBehaviour
         var direction = GetInputTranslationDirection();
         direction.y = 0f;
         direction = Vector3.ClampMagnitude(direction, 1f);
+        if (direction.sqrMagnitude > .1f)
+            walkDuration += Time.deltaTime;
+        else
+            walkDuration -= Time.deltaTime * 3f;
+        walkDuration = Mathf.Clamp01(walkDuration);
+        if (walkDuration < 1f)
+            direction *= walkDuration;
         Vector3 move = Camera.forward * direction.z + Camera.right * direction.x * .85f;
         move.y = lastmove.y;
         lastmove = move * acceleration + lastmove * (1f - acceleration);
@@ -53,6 +65,8 @@ public class Move : MonoBehaviour
         HandleBob();
         HandleCrouch();
     }
+
+    bool stepped = false;
     void HandleBob()
     {
         var f = lastmove.magnitude;
@@ -60,12 +74,28 @@ public class Move : MonoBehaviour
         {
             bobMagnitude -= Time.deltaTime * 2f;
             if(bobMagnitude < .01f)
+            {
                 bobProgression = 0f;
+                stepped = false;
+            }
         }
         else
         {
+            if(stepped == false)
+            {
+                if (Mathf.Sin(bobProgression * 15f) > 0f && walkDuration > .01f)
+                {
+                    OnStep.Invoke();
+                    stepped = true;
+                    Debug.Log("Step!");
+                }
+            }
+            else if(Mathf.Sin(bobProgression * 15f) < 0f)
+            {
+                stepped = false;
+            }
             bobProgression += Time.deltaTime * f;
-            bobMagnitude += Time.deltaTime * f;
+            bobMagnitude += Time.deltaTime * f * 5f;
         }
         bobMagnitude = Mathf.Clamp01(bobMagnitude);
     }
@@ -78,7 +108,7 @@ public class Move : MonoBehaviour
         {
             crouch = Mathf.Lerp(crouch, 0f, Time.deltaTime * 5f);
         }
-        Camera.localPosition = cameraStartPosition + Vector3.down * crouchDelta * crouch + (bobMagnitude * Mathf.Sin(bobProgression * 10f) * Vector3.down * .12f);
+        Camera.localPosition = cameraStartPosition + Vector3.down * crouchDelta * crouch + (bobMagnitude * Mathf.Sin(bobProgression * 15f) * Vector3.down * .08f);
     }
 
     Vector3 GetInputTranslationDirection()
