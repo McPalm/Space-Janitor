@@ -447,6 +447,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   yaw: 0
+  pitch: 0
   mouseSensitivityFactor: 3
 --- !u!1 &6047654348017891735
 GameObject:
@@ -567,7 +568,7 @@ CharacterController:
   m_Height: 2
   m_Radius: 0.4
   m_SlopeLimit: 45
-  m_StepOffset: 0.3
+  m_StepOffset: 0.4
   m_SkinWidth: 0.12
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}

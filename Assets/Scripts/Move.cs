@@ -24,7 +24,8 @@ public class Move : MonoBehaviour
 
     private void Start()
     {
-        Cursor.lockState = CursorLockMode.Confined; //lock dat cursor
+        Cursor.lockState = CursorLockMode.Locked; //lock dat cursor
+        // Application.
         cameraStartPosition = Camera.localPosition;
     }
 
