@@ -27,7 +27,7 @@ public class Gamestate : MonoBehaviour
         Player.enabled = false;
         Player.transform.position = Entrance.position;
         look.pitch = 0f;
-        look.yaw = 0f;
+        look.yaw = 180f;
         Player.enabled = true;
         yield return new WaitForSeconds(.5f);
         BussGenerator.trashNumber = 5 + count;
