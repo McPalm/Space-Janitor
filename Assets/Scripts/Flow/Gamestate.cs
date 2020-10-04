@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class Gamestate : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class Gamestate : MonoBehaviour
     public TimeOfDay timeOfDay;
     public FadeToBlack FadeToBlack;
     public BreakdownPrint BreakdownPrint;
+    public AudioMixer EffectMixer;
 
     public Transform Entrance;
     public CharacterController Player;
@@ -21,7 +23,7 @@ public class Gamestate : MonoBehaviour
     IEnumerator Start()
     {
         int currentDay = 0;
-
+        EffectMixer.SetFloat("NoiseVolume", -80f);
 
     start:
 
@@ -45,6 +47,7 @@ public class Gamestate : MonoBehaviour
             VoiceSource.Play();
         }
         yield return FadeToBlack.ToBlack(1f);
+        EffectMixer.SetFloat("NoiseVolume", -80f);
         yield return new WaitForSeconds(.5f);
         yield return BreakdownPrint.ShowDayBreakdown(penalty: 50 * BussGenerator.MissedTrash());
         BussGenerator.Reset();
@@ -86,6 +89,7 @@ public class Gamestate : MonoBehaviour
         Player.enabled = true;
         yield return new WaitForSeconds(.5f);
         BussGenerator.trashNumber = day.trashNumber;
+        EffectMixer.SetFloat("NoiseVolume", 3f);
         yield return FadeToBlack.ToClear(1f);
         timeOfDay.scale = 1f;
         timeOfDay.StartDay();

@@ -502,6 +502,7 @@ MonoBehaviour:
   timeOfDay: {fileID: 371038611}
   FadeToBlack: {fileID: 730760038}
   BreakdownPrint: {fileID: 1530383266}
+  EffectMixer: {fileID: 24100000, guid: 5a115fcfffe25b24ca713b4f20f5b64e, type: 2}
   Entrance: {fileID: 462295588}
   Player: {fileID: 2100811599}
   Days:
