@@ -28,6 +28,7 @@ public class BussGenerator : MonoBehaviour
             var point = GetRandomPoint();
             var fab = TrashPrefabs[Random.Range(0, TrashPrefabs.Length)];
             var obj = Instantiate(fab, GetRandomPoint(), Quaternion.identity); // TODO randomize the rotation probably.
+            obj.transform.rotation = new Quaternion(Random.value * 180f, Random.value * 180f, Random.value * 180f, Random.value * 180f);
             spawnedTrash.Add(obj);
         }
     }
