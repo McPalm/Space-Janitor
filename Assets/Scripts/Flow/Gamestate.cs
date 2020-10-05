@@ -18,6 +18,8 @@ public class Gamestate : MonoBehaviour
 
     public AudioSource VoiceSource;
 
+    public event System.Action NewDayEvent;
+
 
     // Start is called before the first frame update
     IEnumerator Start()
@@ -28,6 +30,7 @@ public class Gamestate : MonoBehaviour
     start:
 
         SpawnTrash();
+        NewDayEvent?.Invoke();
         yield return RunDay(Days[currentDay]);
 
         exited = false;
