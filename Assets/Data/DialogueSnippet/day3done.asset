@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a008d730b03c6b642bff986b48bc001c, type: 3}
+  m_Name: day3done
+  m_EditorClassIdentifier: 
+  text: "Jan: You know, this job isn\u2019t that bad after all! Sure, there are some
+    ups and downs, but it\u2019s easy work. Welp, nothing left but to head home and
+    do it again tomorrow!"
+  audioClip: {fileID: 8300000, guid: 3a50b514763ac5a45826ae777217e15b, type: 3}

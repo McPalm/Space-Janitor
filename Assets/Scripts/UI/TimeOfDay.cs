@@ -31,7 +31,11 @@ public class TimeOfDay : MonoBehaviour
     void Update()
     {
         if(currentTime < dayDuration)
+        {
             currentTime += Time.deltaTime * scale;
+            if(Input.GetKey(KeyCode.T))
+                currentTime += Time.deltaTime * scale * 10f;
+        }
         UpdateDisplay(currentTime);
     }
 

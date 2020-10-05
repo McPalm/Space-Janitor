@@ -13,11 +13,17 @@ MonoBehaviour:
   m_Name: 05 - Friday
   m_EditorClassIdentifier: 
   dayName: Friday
-  PreworkAudio: []
+  PreworkAudio:
+  - {fileID: 11400000, guid: e30fc6bd7b49cbb48b1314b704333bf8, type: 2}
+  - {fileID: 11400000, guid: 996c8cd201691c84f9a56b606c191108, type: 2}
   WorkAudio:
   - {fileID: 11400000, guid: 87b1f4ce8f64c9c44af25b25b0b9e6ad, type: 2}
+  - {fileID: 11400000, guid: fcd3b19273490d945b10b4b6caf18d94, type: 2}
   HalfDayAudio:
+  - {fileID: 11400000, guid: dc0be80db6c2e1f4d855ce92736580f8, type: 2}
   - {fileID: 11400000, guid: 80c3ce2b66ed8204abe3dd346b343285, type: 2}
+  - {fileID: 11400000, guid: 71c1395231e132447bbcc12c5ce3aa9a, type: 2}
   EndDayAudio: {fileID: 0}
   StartHour: 8
   trashNumber: 10
+  dirtNumber: 6
