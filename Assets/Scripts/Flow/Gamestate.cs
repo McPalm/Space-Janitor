@@ -20,6 +20,8 @@ public class Gamestate : MonoBehaviour
 
     public event System.Action NewDayEvent;
 
+    public GameObject TextBox;
+    public TMPro.TextMeshProUGUI TextText;
 
     // Start is called before the first frame update
     IEnumerator Start()
@@ -44,12 +46,9 @@ public class Gamestate : MonoBehaviour
         }
 
     evaluate:
-        if(Days[currentDay].EndDayAudio != null)
-        {
-            VoiceSource.clip = Days[currentDay].EndDayAudio;
-            VoiceSource.Play();
-        }
         yield return FadeToBlack.ToBlack(1f);
+        if(Days[currentDay].EndDayAudio != null)
+            yield return PlaySnippet(Days[currentDay].EndDayAudio);
         EffectMixer.SetFloat("NoiseVolume", -80f);
         yield return new WaitForSeconds(.5f);
         yield return BreakdownPrint.ShowDayBreakdown(penalty: 50 * BussGenerator.MissedTrash());
@@ -79,10 +78,7 @@ public class Gamestate : MonoBehaviour
 
         for (int i = 0; i < day.PreworkAudio.Length; i++)
         {
-            VoiceSource.clip = day.PreworkAudio[i];
-            VoiceSource.Play();
-            while (VoiceSource.isPlaying)
-                yield return null;
+            yield return PlaySnippet(day.PreworkAudio[i]);
         }
 
         Player.enabled = false;
@@ -100,10 +96,7 @@ public class Gamestate : MonoBehaviour
         // day
         for (int i = 0; i < day.WorkAudio.Length; i++)
         {
-            VoiceSource.clip = day.WorkAudio[i];
-            VoiceSource.Play();
-            while (VoiceSource.isPlaying)
-                yield return null;
+            yield return PlaySnippet(day.WorkAudio[i]);
         }
 
         // half day
@@ -114,13 +107,25 @@ public class Gamestate : MonoBehaviour
 
             for (int i = 0; i < day.HalfDayAudio.Length; i++)
             {
-                VoiceSource.clip = day.HalfDayAudio[i];
-                VoiceSource.Play();
-                while (VoiceSource.isPlaying)
-                    yield return null;
+                yield return PlaySnippet(day.HalfDayAudio[i]);
+                
             }
         }
 
 
+    }
+
+    public IEnumerator PlaySnippet(DialogueSnippet snippet)
+    {
+        TextText.text = "";
+        TextBox.SetActive(true);
+        yield return new WaitForSeconds(.2f);
+        VoiceSource.clip = snippet.audioClip;
+        VoiceSource.Play();
+        TextText.text = snippet.text;
+        while (VoiceSource.isPlaying)
+            yield return null;
+        TextBox.SetActive(false);
+        TextText.text = "";
     }
 }

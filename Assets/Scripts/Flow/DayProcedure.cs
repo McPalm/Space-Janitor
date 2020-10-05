@@ -6,10 +6,10 @@ using UnityEngine;
 public class DayProcedure : ScriptableObject
 {
     public string dayName = "Monday";
-    public AudioClip[] PreworkAudio;
-    public AudioClip[] WorkAudio;
-    public AudioClip[] HalfDayAudio;
-    public AudioClip EndDayAudio;
+    public DialogueSnippet[] PreworkAudio;
+    public DialogueSnippet[] WorkAudio;
+    public DialogueSnippet[] HalfDayAudio;
+    public DialogueSnippet EndDayAudio;
     public int StartHour = 6;
     public int trashNumber = 10;
     

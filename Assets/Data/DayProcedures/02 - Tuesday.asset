@@ -15,9 +15,9 @@ MonoBehaviour:
   dayName: Tuesday
   PreworkAudio: []
   WorkAudio:
-  - {fileID: 8300000, guid: 7687671cd41c1664f8b89658b3ab7855, type: 3}
+  - {fileID: 11400000, guid: f620584934c46a343946d02f6c8fb3a8, type: 2}
   HalfDayAudio:
-  - {fileID: 8300000, guid: 716985d4ac12a754fa50fa65d93df910, type: 3}
+  - {fileID: 11400000, guid: 22bda077b1ceafb4daa2e90806bf605e, type: 2}
   EndDayAudio: {fileID: 0}
   StartHour: 10
   trashNumber: 10
