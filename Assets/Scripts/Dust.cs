@@ -31,7 +31,7 @@ public class Dust : MonoBehaviour
     public IEnumerator Fin()
     {
         GetComponent<Collider>().enabled = false;
-        GetComponent<MeshRenderer>().enabled = false;
+        GetComponentInChildren<MeshRenderer>().enabled = false;
 
         yield return new WaitForSeconds(1.5f);
         gameObject.SetActive(false);
