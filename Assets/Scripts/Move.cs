@@ -101,7 +101,7 @@ public class Move : MonoBehaviour
 
     void HandleCrouch()
     {
-        if (Input.GetKey(KeyCode.LeftControl))
+        if (Input.GetKey(KeyCode.LeftShift))
             crouch = Mathf.Lerp(crouch, 1f, Time.deltaTime * 5f);
         else
         {
@@ -115,7 +115,7 @@ public class Move : MonoBehaviour
         Vector3 direction = new Vector3();
 
 
-        if (Input.GetKey(KeyCode.W))
+        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.Z))
         {
             direction += Vector3.forward;
         }
@@ -123,7 +123,7 @@ public class Move : MonoBehaviour
         {
             direction += Vector3.back;
         }
-        if (Input.GetKey(KeyCode.A))
+        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.Q))
         {
             direction += Vector3.left;
         }
@@ -131,10 +131,6 @@ public class Move : MonoBehaviour
         {
             direction += Vector3.right;
         }
-        //if(Input.GetKey(KeyCode.Escape))
-        //{
-        //    Application.Quit();
-        //}
 
         return direction;
     }
