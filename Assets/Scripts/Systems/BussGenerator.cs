@@ -29,12 +29,10 @@ public class BussGenerator : MonoBehaviour
         {
             dirt.gameObject.SetActive(false);
         }
-        Debug.Log(DirtPatches.Length);
     }
 
     public void Generate()
     {
-        Debug.Log($"Generating {trashNumber} trash!");
         for (int i = 0; i < trashNumber; i++)
         {
             var point = GetRandomPoint();

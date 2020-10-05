@@ -87,7 +87,6 @@ public class Move : MonoBehaviour
                 {
                     OnStep.Invoke();
                     stepped = true;
-                    Debug.Log("Step!");
                 }
             }
             else if(Mathf.Sin(bobProgression * 15f) < 0f)
