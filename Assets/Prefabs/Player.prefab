@@ -777,8 +777,8 @@ MonoBehaviour:
   OnStep:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2712144773497560481}
-        m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
+      - m_Target: {fileID: 3191140841145513519}
+        m_TargetAssemblyTypeName: RandomNoise, Assembly-CSharp
         m_MethodName: Play
         m_Mode: 1
         m_Arguments:
@@ -880,6 +880,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4259007242398745866}
   - component: {fileID: 2712144773497560481}
+  - component: {fileID: 3191140841145513519}
   m_Layer: 0
   m_Name: Step
   m_TagString: Untagged
@@ -997,3 +998,20 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &3191140841145513519
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8235012636382190756}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3383bee2b05ef5044bc0fa7ab21fc987, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  noises:
+  - {fileID: 8300000, guid: 5ddbbf9e68847034c9e8f36a21771e27, type: 3}
+  - {fileID: 8300000, guid: 003905470eee5eb41984a01d23f917a0, type: 3}
+  - {fileID: 8300000, guid: b40180201af556c4da51f84936bafcb7, type: 3}
+  AudioSource: {fileID: 2712144773497560481}
