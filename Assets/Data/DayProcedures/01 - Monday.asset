@@ -17,6 +17,6 @@ MonoBehaviour:
   WorkAudio:
   - {fileID: 8300000, guid: 6c7daf6059e17934db7b88bcc39fcb03, type: 3}
   HalfDayAudio: []
-  EndDayAudio: {fileID: 8300000, guid: d5b164970f3c4284790e034234dee55d, type: 3}
+  EndDayAudio: {fileID: 0}
   StartHour: 8
   trashNumber: 10

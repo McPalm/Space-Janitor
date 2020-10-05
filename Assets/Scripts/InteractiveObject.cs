@@ -7,7 +7,8 @@ public enum ObjectType
 {
     Trash,
     TrashCan,
-    Interact
+    Interact,
+    Broom
 };
 
 public class InteractiveObject : MonoBehaviour

@@ -9,24 +9,35 @@ public class Interaction : MonoBehaviour
     public Camera PlayerCamera;
     public GameObject GrabPoint;
     public GameObject ThrowPoint;
+    public Transform ToolGrip;
+    public Animator ToolAnimator;
     public float throwForce = 50f;
     public float reach = 1f;
 
     private int layerMask = 1 << 8;
     public bool mouseOver { get; private set; }
 
+
     public bool IsHoldingObject => PickedUpObject != null;
     [SerializeField] private Rigidbody PickedUpObject;
 
+    bool IsHoldingThrowAble => IsHoldingObject && CurrentState == InteractionState.HoldingTrash;
 
     public float ChargeLevel => chargeInit > 0f ? Mathf.Clamp(Time.timeSinceLevelLoad - chargeInit, 0f, 1.5f) : 0f;
     float chargeInit = 0f;
+    float pickupat = 0f;
+    public float TimeSincePickup => Time.timeSinceLevelLoad - pickupat;
+
+    public AudioSource AudioSource;
+    public AudioClip[] GrabSound;
+
 
     public enum InteractionState
     {
         Default,
         HoldingTrash,
-        HoldingTool
+        HoldingTool,
+        HoldingBroom
     }
     public InteractionState CurrentState { get; private set; } = InteractionState.Default;
 
@@ -37,7 +48,7 @@ public class Interaction : MonoBehaviour
         if(Input.GetMouseButtonUp(0) && chargeInit != 0f)
         {
             // actually throw
-            if(IsHoldingObject)
+            if(IsHoldingThrowAble)
             {
                 var power = 1f + ChargeLevel * 6f;
                 DropCurrentObject(power);
@@ -70,15 +81,8 @@ public class Interaction : MonoBehaviour
                 {
                     default:
                         break;
-                    case 0:
-                        break;
                     case InteractionState.HoldingTrash:
-                        //DropCurrentObject(5f);
                         chargeInit = Time.timeSinceLevelLoad;
-                        break;
-                    case InteractionState.HoldingTool:
-                        chargeInit = Time.timeSinceLevelLoad;
-                        //DropCurrentObject(5f);
                         break;
                 }
             }
@@ -89,9 +93,17 @@ public class Interaction : MonoBehaviour
         }
         else if(IsHoldingObject)
         {
-            var rb = PickedUpObject;
-            var point = chargeInit != 0f ? ThrowPoint.transform.position : GrabPoint.transform.position;
-            rb.velocity = (point - rb.transform.position) * (3f  + 2f/ rb.mass);
+            switch (CurrentState)
+            {
+                default:
+                    var rb = PickedUpObject;
+                    var point = chargeInit != 0f ? ThrowPoint.transform.position : GrabPoint.transform.position;
+                    rb.velocity = (point - rb.transform.position) * (3f + 2f / rb.mass);
+                    break;
+                case InteractionState.HoldingBroom:
+                    ToolAnimator.SetBool("Using", TimeSincePickup > .5f && Input.GetMouseButton(0));
+                    break;
+            }
         }
         if (IsHoldingObject == false && CurrentState != InteractionState.Default)
             CurrentState = InteractionState.Default;
@@ -101,6 +113,8 @@ public class Interaction : MonoBehaviour
 
     void Pickup(GameObject gameObject)
     {
+        AudioSource.clip = GrabSound[Random.Range(0, GrabSound.Length)];
+        AudioSource.Play();
         PickedUpObject = Hit.collider.GetComponent<Rigidbody>();
         //PickedUpObject.transform.parent = GrabPoint.transform;
         //PickedUpObject.transform.position = GrabPoint.transform.position;
@@ -117,25 +131,32 @@ public class Interaction : MonoBehaviour
                 case ObjectType.TrashCan:
                     CurrentState = InteractionState.HoldingTool;
                     break;
+                case ObjectType.Broom:
+                    CurrentState = InteractionState.HoldingBroom;
+                    gameObject.transform.SetParent(ToolGrip);
+                    gameObject.transform.localPosition = Vector3.zero;
+                    gameObject.transform.localRotation = Quaternion.identity;
+                    PickedUpObject.isKinematic = true;
+                    break;
             }
         }
 
+        pickupat = Time.timeSinceLevelLoad;
         chargeInit = 0f;
         PickedUpObject.useGravity = false;
     }
 
     void DropCurrentObject(float force = 0)
     {
-        //PickedUpObject.transform.parent = null;
-        var rigidbody = PickedUpObject.GetComponent<Rigidbody>();
-        if (rigidbody)
+        PickedUpObject.transform.parent = null;
+        if (PickedUpObject)
         {
-            rigidbody.isKinematic = false;
-            rigidbody.useGravity = true;
+            PickedUpObject.isKinematic = false;
+            PickedUpObject.useGravity = true;
             if (force > 0f)
             {
-                rigidbody.velocity = Vector3.zero;
-                rigidbody.AddForce(PlayerCamera.transform.forward * force * throwForce + Vector3.up * throwForce * force * .5f);
+                PickedUpObject.velocity = Vector3.zero;
+                PickedUpObject.AddForce(PlayerCamera.transform.forward * force * throwForce + Vector3.up * throwForce * force * .5f);
             }
         }
         PickedUpObject = null;
