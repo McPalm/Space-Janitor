@@ -13,7 +13,7 @@ public class Dust : MonoBehaviour
         transform.localScale = Vector3.one;
         sweepProgress = 0f;
         GetComponent<Collider>().enabled = true;
-        GetComponent<MeshRenderer>().enabled = true;
+        GetComponentInChildren<MeshRenderer>().enabled = true;
     }
 
     public void Sweep()

@@ -343,6 +343,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -4787420448073241215, guid: ac9467694a50fad409a3a82334b863a9, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 0dea5fd621867f74d8ee9b48dbb3bfc3, type: 2}
     - target: {fileID: -472694773747579423, guid: ac9467694a50fad409a3a82334b863a9, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -354,6 +358,10 @@ PrefabInstance:
     - target: {fileID: 1173152333072634081, guid: ac9467694a50fad409a3a82334b863a9, type: 3}
       propertyPath: m_Constraints
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1173152333072634081, guid: ac9467694a50fad409a3a82334b863a9, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4355301006765469189, guid: ac9467694a50fad409a3a82334b863a9, type: 3}
       propertyPath: m_LocalPosition.x

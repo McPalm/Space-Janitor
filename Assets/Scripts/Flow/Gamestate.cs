@@ -31,7 +31,7 @@ public class Gamestate : MonoBehaviour
         EffectMixer.SetFloat("NoiseVolume", -80f);
 
     start:
-
+        currentDay %= Days.Length;
         SpawnTrash();
         NewDayEvent?.Invoke();
         yield return RunDay(Days[currentDay]);
