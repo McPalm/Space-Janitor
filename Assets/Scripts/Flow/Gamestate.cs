@@ -47,6 +47,7 @@ public class Gamestate : MonoBehaviour
         }
 
     evaluate:
+        Player.GetComponent<Interaction>().DropCurrentObject();
         yield return FadeToBlack.ToBlack(1f);
         if(Days[currentDay].EndDayAudio != null)
             yield return PlaySnippet(Days[currentDay].EndDayAudio);
@@ -92,6 +93,7 @@ public class Gamestate : MonoBehaviour
         yield return new WaitForSeconds(.5f);
         BussGenerator.trashNumber = day.trashNumber;
         EffectMixer.SetFloat("NoiseVolume", 3f);
+        
         yield return FadeToBlack.ToClear(1f);
         timeOfDay.scale = 1f;
 

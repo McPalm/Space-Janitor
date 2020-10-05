@@ -146,11 +146,11 @@ public class Interaction : MonoBehaviour
         PickedUpObject.useGravity = false;
     }
 
-    void DropCurrentObject(float force = 0)
+    public void DropCurrentObject(float force = 0)
     {
-        PickedUpObject.transform.parent = null;
         if (PickedUpObject)
         {
+            PickedUpObject.transform.parent = null;
             PickedUpObject.isKinematic = false;
             PickedUpObject.useGravity = true;
             if (force > 0f)
