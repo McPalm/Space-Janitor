@@ -11,4 +11,7 @@ public class DialogueSnippet : ScriptableObject
 
     public bool showClock;
     public string time;
+
+    public bool loadScene;
+    public int sceneNumber;
 }

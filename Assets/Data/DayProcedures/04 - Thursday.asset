@@ -25,6 +25,6 @@ MonoBehaviour:
   HalfDayAudio: []
   EndDayAudio: {fileID: 11400000, guid: 2b1c74461fb7a3c4486b129e891dd58d, type: 2}
   StartHour: 9
-  trashNumber: 10
-  dirtNumber: 6
+  trashNumber: 7
+  dirtNumber: 10
   skipStartTime: 1

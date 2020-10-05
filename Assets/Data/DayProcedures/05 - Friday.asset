@@ -25,5 +25,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 71c1395231e132447bbcc12c5ce3aa9a, type: 2}
   EndDayAudio: {fileID: 0}
   StartHour: 8
-  trashNumber: 10
-  dirtNumber: 6
+  trashNumber: 3
+  dirtNumber: 10
+  skipStartTime: 0

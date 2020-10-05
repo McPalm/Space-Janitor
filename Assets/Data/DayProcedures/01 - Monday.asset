@@ -24,3 +24,4 @@ MonoBehaviour:
   StartHour: 8
   trashNumber: 10
   dirtNumber: 3
+  skipStartTime: 0

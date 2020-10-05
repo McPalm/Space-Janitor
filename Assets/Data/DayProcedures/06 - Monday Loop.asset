@@ -16,9 +16,11 @@ MonoBehaviour:
   PreworkAudio:
   - {fileID: 11400000, guid: e30fc6bd7b49cbb48b1314b704333bf8, type: 2}
   - {fileID: 11400000, guid: 6540421a561b70649a44887c50172063, type: 2}
+  - {fileID: 11400000, guid: 24a3ab8861bc20a458a7044ddcb8fdff, type: 2}
   WorkAudio: []
   HalfDayAudio: []
   EndDayAudio: {fileID: 0}
   StartHour: 8
   trashNumber: 10
   dirtNumber: 6
+  skipStartTime: 0
