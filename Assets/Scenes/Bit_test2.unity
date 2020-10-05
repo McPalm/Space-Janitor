@@ -86436,6 +86436,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gameplay
       objectReference: {fileID: 0}
+    - target: {fileID: 2430620589998025869, guid: cfad0cc9272e6464691f6592520fd67f, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2430620589998025870, guid: cfad0cc9272e6464691f6592520fd67f, type: 3}
       propertyPath: HudClock
       value: 

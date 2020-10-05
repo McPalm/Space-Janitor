@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dayName: Wednesday
   PreworkAudio:
+  - {fileID: 11400000, guid: 10180efa8612aa444b201cd44606885f, type: 2}
   - {fileID: 11400000, guid: c83490ba52a68c34188e3518c1578188, type: 2}
   - {fileID: 11400000, guid: 2e4f728da946f7e40bd3de1a134bc976, type: 2}
   - {fileID: 11400000, guid: 495a1c895cc20ef4eaafc5212202e106, type: 2}
@@ -25,3 +26,4 @@ MonoBehaviour:
   StartHour: 8
   trashNumber: 10
   dirtNumber: 6
+  skipStartTime: 1

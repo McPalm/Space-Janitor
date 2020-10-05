@@ -14,7 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dayName: Thursday
   PreworkAudio:
+  - {fileID: 11400000, guid: 9a6faf9f27662604fa8696f9c16e8aaa, type: 2}
   - {fileID: 11400000, guid: f30ee8c05a6d1ff45bf6822778bb4c17, type: 2}
+  - {fileID: 11400000, guid: d24478f317982d04981c5d64046e10aa, type: 2}
   - {fileID: 11400000, guid: e30fc6bd7b49cbb48b1314b704333bf8, type: 2}
   - {fileID: 11400000, guid: 2d400db3553815244ab6d7c91527f5d1, type: 2}
   WorkAudio:
@@ -22,6 +24,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 78d1010e3d7912e40a83ca8fda0206b4, type: 2}
   HalfDayAudio: []
   EndDayAudio: {fileID: 11400000, guid: 2b1c74461fb7a3c4486b129e891dd58d, type: 2}
-  StartHour: 10
+  StartHour: 9
   trashNumber: 10
   dirtNumber: 6
+  skipStartTime: 1

@@ -72,10 +72,12 @@ public class Gamestate : MonoBehaviour
         var look = Player.GetComponentInChildren<LookAround>();
         timeOfDay.scale = 0f;
         timeOfDay.startHour = day.StartHour;
+        timeOfDay.StartDay();
 
         // day startup
         yield return new WaitForSeconds(.3f);
-        yield return BreakdownPrint.ShowCurrentDay($"{day.dayName} {timeOfDay.startHour : 00}:00");
+        if(day.skipStartTime == false)
+            yield return BreakdownPrint.ShowCurrentDay($"{day.dayName} {timeOfDay.startHour : 00}:00");
 
         for (int i = 0; i < day.PreworkAudio.Length; i++)
         {
@@ -92,7 +94,6 @@ public class Gamestate : MonoBehaviour
         EffectMixer.SetFloat("NoiseVolume", 3f);
         yield return FadeToBlack.ToClear(1f);
         timeOfDay.scale = 1f;
-        timeOfDay.StartDay();
 
         // day
         for (int i = 0; i < day.WorkAudio.Length; i++)
@@ -118,15 +119,22 @@ public class Gamestate : MonoBehaviour
 
     public IEnumerator PlaySnippet(DialogueSnippet snippet)
     {
-        TextText.text = "";
-        TextBox.SetActive(true);
-        yield return new WaitForSeconds(.2f);
-        VoiceSource.clip = snippet.audioClip;
-        VoiceSource.Play();
-        TextText.text = snippet.text;
-        while (VoiceSource.isPlaying)
-            yield return null;
-        TextBox.SetActive(false);
-        TextText.text = "";
+        if (snippet.showClock)
+        {
+            yield return BreakdownPrint.ShowCurrentDay(snippet.time);
+        }
+        else
+        {
+            TextText.text = "";
+            TextBox.SetActive(true);
+            yield return new WaitForSeconds(.2f);
+            VoiceSource.clip = snippet.audioClip;
+            VoiceSource.Play();
+            TextText.text = snippet.text;
+            while (VoiceSource.isPlaying)
+                yield return null;
+            TextBox.SetActive(false);
+            TextText.text = "";
+        }
     }
 }

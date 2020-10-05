@@ -13,5 +13,6 @@ public class DayProcedure : ScriptableObject
     public int StartHour = 6;
     public int trashNumber = 10;
     public int dirtNumber = 6;
+    public bool skipStartTime = false;
     
 }

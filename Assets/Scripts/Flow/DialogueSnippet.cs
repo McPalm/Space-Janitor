@@ -8,4 +8,7 @@ public class DialogueSnippet : ScriptableObject
     [TextArea]
     public string text;
     public AudioClip audioClip;
+
+    public bool showClock;
+    public string time;
 }
