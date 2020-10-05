@@ -12,5 +12,6 @@ public class DayProcedure : ScriptableObject
     public DialogueSnippet EndDayAudio;
     public int StartHour = 6;
     public int trashNumber = 10;
+    public int dirtNumber = 6;
     
 }

@@ -139,6 +139,7 @@ GameObject:
   - component: {fileID: 1043217448}
   - component: {fileID: 1795632526407926445}
   - component: {fileID: 6340345710555699735}
+  - component: {fileID: 7274149467401301418}
   m_Layer: 0
   m_Name: ToolRig
   m_TagString: Untagged
@@ -158,6 +159,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 695616269}
+  - {fileID: 69737939897765760}
   m_Father: {fileID: 6047654348017891736}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -203,7 +205,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 08e3a65985a14144aa9bcfbe49d481d2, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -301,8 +303,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 133290aa37975e243b4c5c0991944e0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Clip: {fileID: 8300000, guid: 08e3a65985a14144aa9bcfbe49d481d2, type: 3}
+  Clip: {fileID: 0}
   AudioSource: {fileID: 1795632526407926445}
+--- !u!114 &7274149467401301418
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1043217445}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f5f221821f3422428f63b98c96c7f1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SweepPoint: {fileID: 69737939897765760}
+  DirtMask:
+    serializedVersion: 2
+    m_Bits: 512
 --- !u!1 &1139781744
 GameObject:
   m_ObjectHideFlags: 0
@@ -710,7 +728,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6047654348017891735}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -822,6 +840,36 @@ MonoBehaviour:
   GrabSound:
   - {fileID: 8300000, guid: ee9ef72d4cbb1a14abbaa6c19ba7bc42, type: 3}
   - {fileID: 8300000, guid: f12d7a86d59659047af33a27be534b42, type: 3}
+--- !u!1 &7715729142254482817
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 69737939897765760}
+  m_Layer: 0
+  m_Name: SweepPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &69737939897765760
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7715729142254482817}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -1.009, z: 0.733}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1043217446}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8235012636382190756
 GameObject:
   m_ObjectHideFlags: 0

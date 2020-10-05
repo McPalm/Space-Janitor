@@ -10,14 +10,26 @@ public class BussGenerator : MonoBehaviour
     Transform MockPoint;
 
     public int trashNumber;
+    public int dirtNumber = 3;
 
     List<GameObject> spawnedTrash;
+    Dust[] DirtPatches;
 
     private void Awake()
     {
         MockPoint = new GameObject().transform;
         MockPoint.SetParent(SpawnZone.transform);
         spawnedTrash = new List<GameObject>();
+    }
+
+    private void Start()
+    {
+        DirtPatches = FindObjectsOfType<Dust>();
+        foreach(var dirt in DirtPatches)
+        {
+            dirt.gameObject.SetActive(false);
+        }
+        Debug.Log(DirtPatches.Length);
     }
 
     public void Generate()
@@ -31,6 +43,10 @@ public class BussGenerator : MonoBehaviour
             obj.transform.rotation = new Quaternion(Random.value * 180f, Random.value * 180f, Random.value * 180f, Random.value * 180f);
             spawnedTrash.Add(obj);
         }
+        for(int i = 0; i < dirtNumber; i++)
+        {
+            DirtPatches[Random.Range(0, DirtPatches.Length)].gameObject.SetActive(true);
+        }
     }
 
     public int MissedTrash()
@@ -39,6 +55,11 @@ public class BussGenerator : MonoBehaviour
         foreach(var trash in spawnedTrash)
         {
             if (trash != null)
+                miss++;
+        }
+        foreach(var dirt in DirtPatches)
+        {
+            if (dirt.isActiveAndEnabled)
                 miss++;
         }
         return miss;
@@ -50,6 +71,10 @@ public class BussGenerator : MonoBehaviour
         {
             if (trash != null)
                 Destroy(trash);
+        }
+        foreach (var dirt in DirtPatches)
+        {
+            dirt.gameObject.SetActive(false);
         }
         spawnedTrash.Clear();
     }

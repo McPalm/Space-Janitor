@@ -20,3 +20,4 @@ MonoBehaviour:
   EndDayAudio: {fileID: 0}
   StartHour: 8
   trashNumber: 10
+  dirtNumber: 3
